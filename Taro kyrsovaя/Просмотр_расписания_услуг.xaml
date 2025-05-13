@@ -1,0 +1,30 @@
+﻿<Window x:Class="Taro_kyrsovaя.Просмотр_Сессий"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Taro_kyrsovaя"
+        mc:Ignorable="d"
+        Title="Просмотр_расписания_услуг" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+
+            <TextBox Width="300"/>
+            <Button Content="Поиск" Width="50" Height="20" Background="Pink"/>
+        </StackPanel>
+        <ListView Grid.Row="1" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Дата" Width="200"/>
+                    <GridViewColumn Header="Услуга" Width="200"/>
+                    <GridViewColumn Header="Имя клиента" Width="200"/>
+                    <GridViewColumn Header="Имя мастера" Width="200"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

@@ -1,0 +1,29 @@
+﻿<Window x:Class="Taro_kyrsovaя.Добавить_услугу"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Taro_kyrsovaя"
+        mc:Ignorable="d"
+        Title="Услуга" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+
+        </Grid.RowDefinitions>
+        <Label Content="Название" FontSize="22"  Grid.Row="0" />
+        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="0"  Background="#FFF4D2D7"/>
+        <Label Content="Описание" FontSize="22"  Grid.Row="1" />
+        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1" Background="#FFF4D2D7" />
+        <Label Content="Стоимость" FontSize="22"  Grid.Row="2" />
+        <TextBox Text="{Binding Workexperience, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="2"  Background="#FFF4D2D7"/>
+        <Label Content="Длительность сессии" FontSize="22"  Grid.Row="3" />
+        <TextBox Text="{Binding Workexperience, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="3"  Background="#FFF4D2D7"/>
+        <Button Content="Добавить" Height="30" Width="200" HorizontalAlignment="Left" Grid.Row="4"  Background="Pink"/>
+    </Grid>
+</Window>

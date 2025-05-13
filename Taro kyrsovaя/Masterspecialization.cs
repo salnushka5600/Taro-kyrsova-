@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Taro_kyrsovaя
+{
+   public class Masterspecialization
+    {
+        public int Id { get; set; }
+        public string IdMaster { get; set; }
+        public string Idspecialization { get; set; }
+        public Master Master { get; set; }
+        public specialization specialization { get; set; }
+        
+    }
+}
