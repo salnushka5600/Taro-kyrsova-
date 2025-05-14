@@ -19,9 +19,11 @@ namespace Taro_kyrsovaя
     /// </summary>
     public partial class ДобавитьКлиента : Window
     {
-        public ДобавитьКлиента()
+        public ДобавитьКлиента(Client selectedClient)
         {
             InitializeComponent();
+            ((ClientVM)this.DataContext).SetClose(Close);
+            ((ClientVM)this.DataContext).Setclient(selectedClient);
         }
     }
 }

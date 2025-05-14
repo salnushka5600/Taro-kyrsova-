@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Taro_kyrsovaя"
+         xmlns:mvvm="clr-namespace:Taro_kyrsovaя"
+        DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
         Title="WinList" Height="450" Width="800">
+    <Window.Resources>
+        <mvvm:TaroMain x:Key="vm"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -16,13 +21,14 @@
             <TextBox Width="300"/>
             <Button Content="Поиск" Width="50" Height="20" Background="Pink"/>
         </StackPanel>
-        <ListView Grid.Row="1">
+        <ListView Grid.Row="1" ItemsSource="{Binding Clients}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Клиенты" Width="200"/>
-                    <GridViewColumn Header="Имя" Width="200"/>
-                    <GridViewColumn Header="Email" Width="200"/>
-                    <GridViewColumn Header="Статус услуги" Width="200"/>
+
+                    <GridViewColumn Header="Имя" Width="200" DisplayMemberBinding ="{Binding Name}"/>
+                    <GridViewColumn Header="Email" Width="200" DisplayMemberBinding ="{Binding Email}"/>
+                    <GridViewColumn Header="Дата регистрации" Width="200" DisplayMemberBinding ="{Binding Dateregistration}"/>
+                    <GridViewColumn Header="Возраст" Width="200" DisplayMemberBinding ="{Binding Age}"/>
                 </GridView>
             </ListView.View>
         </ListView>

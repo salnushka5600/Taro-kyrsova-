@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Taro_kyrsovaя"
+         xmlns:mvvm="clr-namespace:Taro_kyrsovaя"
+        DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
         Title="Добавить клиента" Height="450" Width="600">
+    <Window.Resources>
+        <mvvm:ClientVM x:Key="vm"/>
+    </Window.Resources>
     <Grid>
        
         <Grid.RowDefinitions>
@@ -18,14 +23,14 @@
 
         </Grid.RowDefinitions>
         <Label Content="Имя" FontSize="22"  Grid.Row="0" />
-        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="0" Background="#FFF4D2D7"/>
+        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="0" Background="#FFF4D2D7"  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding Newclient}"/>
         <Label Content="Email" FontSize="22"  Grid.Row="1" />
-        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1"  Background="#FFF4D2D7" />
+        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1"  Background="#FFF4D2D7"  Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding Newclient}"/>
         <Label Content="Дата регистрации" FontSize="22"  Grid.Row="2" />
-        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="2"  Background="#FFF4D2D7" />
-        <Label Content="Статус услуги" FontSize="22"  Grid.Row="3" />
-        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="3"  Background="#FFF4D2D7"/>
-        <Button Content="Добавить" Height="30" Width="200" HorizontalAlignment="Left" Grid.Row="4"  Background="Pink"/>
+        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="2"  Background="#FFF4D2D7"  Text="{Binding Dateregistration, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding Newclient}"/>
+        <Label Content="Возраст" FontSize="22"  Grid.Row="3" />
+        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="3"  Background="#FFF4D2D7"  Text="{Binding Age, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding Newclient}"/>
+        <Button Content="Добавить" Height="30" Width="200" HorizontalAlignment="Left" Grid.Row="4"  Background="Pink" Command="{Binding Insertclient}"/>
 
 
 

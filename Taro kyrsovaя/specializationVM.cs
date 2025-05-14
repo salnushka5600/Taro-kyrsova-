@@ -26,23 +26,28 @@ namespace Taro_kyrsovaя
             Insertspecialization = new CommandMvvm(() =>
             {
 
-
-                specializationDB.GetDb().Insert(Newspecialization);
-                close?.Invoke();
+                if (newspecialization.Id == 0)
+                {
+                    specializationDB.GetDb().Insert(Newspecialization);
+                    close?.Invoke();
+                }
+               
 
 
             },
                 () =>
-
                 !string.IsNullOrEmpty(newspecialization.Title) &&
                 !string.IsNullOrEmpty(newspecialization.Description));
+
+
+
 
 
         }
 
         public void Setspecialization(specialization selectedspecialization)
         {
-            newspecialization = selectedspecialization;
+            Newspecialization = selectedspecialization;
         }
 
         Action close;

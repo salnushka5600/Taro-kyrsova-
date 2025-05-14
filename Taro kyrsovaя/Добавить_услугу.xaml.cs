@@ -22,6 +22,7 @@ namespace Taro_kyrsovaя
         public Добавить_услугу()
         {
             InitializeComponent();
+            ((ServiceVM)this.DataContext).SetClose(Close);
         }
     }
 }

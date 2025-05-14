@@ -8,16 +8,16 @@ using System.Windows;
 
 namespace Taro_kyrsovaя
 {
-   internal class specializationDB
+    internal class SheduleDB
     {
         DBconnection connection;
 
-        private specializationDB(DBconnection db)
+        private SheduleDB(DBconnection db)
         {
             this.connection = db;
         }
 
-        public bool Insert(specialization specialization)
+        public bool Insert(Shedule shedule)
         {
             bool result = false;
             if (connection == null)
@@ -25,10 +25,13 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `Specialization` Values (0, @Title, @Description );select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `Shedule` Values (0, @IDClients, @IDService, @IDMaster, @Date,  @Servicestatus );select LAST_INSERT_ID();");
 
-                cmd.Parameters.Add(new MySqlParameter("Title", specialization.Title));
-                cmd.Parameters.Add(new MySqlParameter("Description", specialization.Description));
+                cmd.Parameters.Add(new MySqlParameter("IDClients", shedule.IDClients));
+                cmd.Parameters.Add(new MySqlParameter("IDService", shedule.IDService));
+                cmd.Parameters.Add(new MySqlParameter("IDMaster", shedule.IDMaster));
+                cmd.Parameters.Add(new MySqlParameter("Date", shedule.Date));
+                cmd.Parameters.Add(new MySqlParameter("Servicestatus", shedule.Servicestatus));
                 try
                 {
                     // выполняем запрос через ExecuteScalar, получаем id вставленной записи
@@ -37,7 +40,7 @@ namespace Taro_kyrsovaя
                     if (id > 0)
                     {
                         // назначаем полученный id обратно в объект для дальнейшей работы
-                        specialization.Id = id;
+                        shedule.Id = id;
                         result = true;
                     }
                     else
@@ -54,15 +57,15 @@ namespace Taro_kyrsovaя
             return result;
         }
 
-        internal List<specialization> SelectAll()
+        internal List<Shedule> SelectAll()
         {
-            List<specialization> specializations = new List<specialization>();
+            List<Shedule> shedules = new List<Shedule>();
             if (connection == null)
-                return specializations;
+                return shedules;
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select `id`, `title`, `description` from `Specialization` ");
+                var command = connection.CreateCommand("select `id`, `idclients`, `idservice`, `idmaster`, `date`, `servicestatus` from `Shedule` ");
                 try
                 {
 
@@ -71,21 +74,34 @@ namespace Taro_kyrsovaя
                     while (dr.Read())
                     {
                         int id = dr.GetInt32(0);
-                        string title = string.Empty;
+                        string idclients = string.Empty;
                         if (!dr.IsDBNull(1))
-                            title = dr.GetString("title");
-                        string description = string.Empty;
+                            idclients = dr.GetString("idclients");
+                        string idservice = string.Empty;
                         if (!dr.IsDBNull(2))
-                            description = dr.GetString("description");
-                        
+                            idservice = dr.GetString("idservice");
+                        string idmaster = string.Empty;
+                        if (!dr.IsDBNull(2))
+                            idmaster = dr.GetString("idmaster");
+                        string date = string.Empty;
+                        if (!dr.IsDBNull(2))
+                            date = dr.GetString("date");
+                        string servicestatus = string.Empty;
+                        if (!dr.IsDBNull(2))
+                            servicestatus = dr.GetString("servicestatus");
 
 
-                        specializations.Add(new specialization
+
+                        shedules.Add(new Shedule
                         {
                             Id = id,
-                            Title = title,
-                            Description = description,  
+                            IDClients = idclients,
+                            IDService = idservice,
+                            IDMaster = idmaster,
+                            Date = date,
+                            Servicestatus = servicestatus,
 
+                        
                         });
                     }
                 }
@@ -95,10 +111,10 @@ namespace Taro_kyrsovaя
                 }
             }
             connection.CloseConnection();
-            return specializations;
+            return shedules;
         }
 
-        internal bool Update(specialization edit)
+        internal bool Update(Shedule edit)
         {
             bool result = false;
             if (connection == null)
@@ -106,9 +122,12 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Specialization` set `title`=@title, `description`=@description where `id` = {edit.Id}");
-                mc.Parameters.Add(new MySqlParameter("title", edit.Title));
-                mc.Parameters.Add(new MySqlParameter("description", edit.Description));
+                var mc = connection.CreateCommand($"update `Shedule` set `idclients`=@idclients, `idservice`=@idservice, `idmaster`=@idmaster, `date`=@date, `servicestatus`=@servicestatus where `id` = {edit.Id}");
+                mc.Parameters.Add(new MySqlParameter("idclients", edit.IDClients));
+                mc.Parameters.Add(new MySqlParameter("idservice", edit.IDService));
+                mc.Parameters.Add(new MySqlParameter("idmaster", edit.IDMaster));
+                mc.Parameters.Add(new MySqlParameter("date", edit.Date));
+                mc.Parameters.Add(new MySqlParameter("servicestatus", edit.Servicestatus));
 
                 try
                 {
@@ -125,7 +144,7 @@ namespace Taro_kyrsovaя
         }
 
 
-        internal bool Remove(specialization remove)
+        internal bool Remove(Shedule remove)
         {
             bool result = false;
             if (connection == null)
@@ -133,7 +152,7 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"delete from `Specialization` where `id` = {remove.Id}");
+                var mc = connection.CreateCommand($"delete from `Shedule` where `id` = {remove.Id}");
                 try
                 {
                     mc.ExecuteNonQuery();
@@ -148,11 +167,11 @@ namespace Taro_kyrsovaя
             return result;
         }
 
-        static specializationDB db;
-        public static specializationDB GetDb()
+        static SheduleDB db;
+        public static SheduleDB GetDb()
         {
             if (db == null)
-                db = new specializationDB(DBconnection.GetDbConnection());                  
+                db = new SheduleDB(DBconnection.GetDbConnection());
             return db;
         }
     }

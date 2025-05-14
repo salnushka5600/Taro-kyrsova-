@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Taro_kyrsovaя"
+         xmlns:mvvm="clr-namespace:Taro_kyrsovaя"
+        DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
         Title="Просмотр_специализаций" Height="450" Width="500">
+    <Window.Resources>
+        <mvvm:TaroMain x:Key="vm"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -16,11 +21,16 @@
             <TextBox Width="300"/>
             <Button Content="Поиск" Width="50" Height="20" Background="Pink"/>
         </StackPanel>
-        <ListView  Grid.Row="1">
+        <ListView  Grid.Row="1" ItemsSource="{Binding Specializations}" SelectedItem="{Binding Selectedspecialization}">
+            <ListView.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Удалить команду" Command="{Binding Removespetialization}"/>
+            </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Специализация" Width="200"/>
-                    <GridViewColumn Header="Название" Width="150"/>
+                    <GridViewColumn Header="Название" Width="200" DisplayMemberBinding ="{Binding Title}"/>
+                    <GridViewColumn Header="Описание" Width="200" DisplayMemberBinding ="{Binding Description}"/>
 
                 </GridView>
             </ListView.View>

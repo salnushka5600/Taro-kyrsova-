@@ -12,7 +12,7 @@ namespace Taro_kyrsovaя
         public string Name { get; set; }
         public string Email { get; set; }
         public string Dateregistration { get; set; }
-        public string Servicestatus { get; set; }
+        public int Age { get; set; }
 
     }
 }

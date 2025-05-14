@@ -8,16 +8,16 @@ using System.Windows;
 
 namespace Taro_kyrsovaя
 {
-   internal class specializationDB
+   internal class ServiceDB 
     {
         DBconnection connection;
 
-        private specializationDB(DBconnection db)
+        private ServiceDB(DBconnection db)
         {
             this.connection = db;
         }
 
-        public bool Insert(specialization specialization)
+        public bool Insert(Service service)
         {
             bool result = false;
             if (connection == null)
@@ -25,10 +25,12 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `Specialization` Values (0, @Title, @Description );select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `Service` Values (0, @Title, @Description, @Price, @Sessionduration );select LAST_INSERT_ID();");
 
-                cmd.Parameters.Add(new MySqlParameter("Title", specialization.Title));
-                cmd.Parameters.Add(new MySqlParameter("Description", specialization.Description));
+                cmd.Parameters.Add(new MySqlParameter("Title", service.Title));
+                cmd.Parameters.Add(new MySqlParameter("Description", service.Description));
+                cmd.Parameters.Add(new MySqlParameter("Price", service.Price));
+                cmd.Parameters.Add(new MySqlParameter("Sessionduration", service.Sessionduration));
                 try
                 {
                     // выполняем запрос через ExecuteScalar, получаем id вставленной записи
@@ -37,7 +39,7 @@ namespace Taro_kyrsovaя
                     if (id > 0)
                     {
                         // назначаем полученный id обратно в объект для дальнейшей работы
-                        specialization.Id = id;
+                        service.Id = id;
                         result = true;
                     }
                     else
@@ -54,15 +56,15 @@ namespace Taro_kyrsovaя
             return result;
         }
 
-        internal List<specialization> SelectAll()
+        internal List<Service> SelectAll()
         {
-            List<specialization> specializations = new List<specialization>();
+            List<Service> services = new List<Service>();
             if (connection == null)
-                return specializations;
+                return services;
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select `id`, `title`, `description` from `Specialization` ");
+                var command = connection.CreateCommand("select `id`, `title`, `description`, `price`, `sessionduration` from `Services` ");
                 try
                 {
 
@@ -77,14 +79,22 @@ namespace Taro_kyrsovaя
                         string description = string.Empty;
                         if (!dr.IsDBNull(2))
                             description = dr.GetString("description");
-                        
+                        string price = string.Empty;
+                        if (!dr.IsDBNull(2))
+                            price = dr.GetString("price");
+                        string sessionduration = string.Empty;
+                        if (!dr.IsDBNull(2))
+                            sessionduration = dr.GetString("sessionduration");
 
 
-                        specializations.Add(new specialization
+
+                        services.Add(new Service
                         {
                             Id = id,
                             Title = title,
-                            Description = description,  
+                            Description = description,
+                            Price = price,
+                            Sessionduration = sessionduration,
 
                         });
                     }
@@ -95,10 +105,10 @@ namespace Taro_kyrsovaя
                 }
             }
             connection.CloseConnection();
-            return specializations;
+            return services;
         }
 
-        internal bool Update(specialization edit)
+        internal bool Update(Service edit)
         {
             bool result = false;
             if (connection == null)
@@ -106,9 +116,11 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Specialization` set `title`=@title, `description`=@description where `id` = {edit.Id}");
+                var mc = connection.CreateCommand($"update `Service` set `title`=@title, `description`=@description, `price`=@price, `sessionduration`=@sessionduration where `id` = {edit.Id}");
                 mc.Parameters.Add(new MySqlParameter("title", edit.Title));
                 mc.Parameters.Add(new MySqlParameter("description", edit.Description));
+                mc.Parameters.Add(new MySqlParameter("price", edit.Price));
+                mc.Parameters.Add(new MySqlParameter("sessionduration", edit.Sessionduration));
 
                 try
                 {
@@ -125,7 +137,7 @@ namespace Taro_kyrsovaя
         }
 
 
-        internal bool Remove(specialization remove)
+        internal bool Remove(Service remove)
         {
             bool result = false;
             if (connection == null)
@@ -133,7 +145,7 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"delete from `Specialization` where `id` = {remove.Id}");
+                var mc = connection.CreateCommand($"delete from `Service` where `id` = {remove.Id}");
                 try
                 {
                     mc.ExecuteNonQuery();
@@ -148,11 +160,11 @@ namespace Taro_kyrsovaя
             return result;
         }
 
-        static specializationDB db;
-        public static specializationDB GetDb()
+        static ServiceDB db;
+        public static ServiceDB GetDb()
         {
             if (db == null)
-                db = new specializationDB(DBconnection.GetDbConnection());                  
+                db = new ServiceDB(DBconnection.GetDbConnection());
             return db;
         }
     }

@@ -5,19 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Taro_kyrsovaя
 {
-   internal class specializationDB
+    internal class ClientDB
     {
         DBconnection connection;
 
-        private specializationDB(DBconnection db)
+        private ClientDB(DBconnection db)
         {
             this.connection = db;
         }
 
-        public bool Insert(specialization specialization)
+        public bool Insert(Client client)
         {
             bool result = false;
             if (connection == null)
@@ -25,10 +26,12 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `Specialization` Values (0, @Title, @Description );select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `Clients` Values (0, @Name, @Email, @Dateregistration, @Age );select LAST_INSERT_ID();");
 
-                cmd.Parameters.Add(new MySqlParameter("Title", specialization.Title));
-                cmd.Parameters.Add(new MySqlParameter("Description", specialization.Description));
+                cmd.Parameters.Add(new MySqlParameter("Name", client.Name));
+                cmd.Parameters.Add(new MySqlParameter("Email", client.Email));
+                cmd.Parameters.Add(new MySqlParameter("Dateregistration", client.Dateregistration));
+                cmd.Parameters.Add(new MySqlParameter("Age", client.Age));
                 try
                 {
                     // выполняем запрос через ExecuteScalar, получаем id вставленной записи
@@ -37,7 +40,7 @@ namespace Taro_kyrsovaя
                     if (id > 0)
                     {
                         // назначаем полученный id обратно в объект для дальнейшей работы
-                        specialization.Id = id;
+                        client.Id = id;
                         result = true;
                     }
                     else
@@ -54,15 +57,15 @@ namespace Taro_kyrsovaя
             return result;
         }
 
-        internal List<specialization> SelectAll()
+        internal List<Client> SelectAll()
         {
-            List<specialization> specializations = new List<specialization>();
+            List<Client> clients = new List<Client>();
             if (connection == null)
-                return specializations;
+                return clients;
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select `id`, `title`, `description` from `Specialization` ");
+                var command = connection.CreateCommand("select `id`, `name`, `email`, `dateregistration`, `age` from `Clients` ");
                 try
                 {
 
@@ -71,20 +74,28 @@ namespace Taro_kyrsovaя
                     while (dr.Read())
                     {
                         int id = dr.GetInt32(0);
-                        string title = string.Empty;
+                        string name = string.Empty;
                         if (!dr.IsDBNull(1))
-                            title = dr.GetString("title");
-                        string description = string.Empty;
+                            name = dr.GetString("name");
+                        string email = string.Empty;
                         if (!dr.IsDBNull(2))
-                            description = dr.GetString("description");
-                        
+                            email = dr.GetString("email");
+                        string dateregistration = string.Empty;
+                        if (!dr.IsDBNull(2))
+                            dateregistration = dr.GetString("dateregistration");
+                        int age = 0;
+                        if (!dr.IsDBNull(2))
+                            age = dr.GetInt32("age");
 
 
-                        specializations.Add(new specialization
+
+                        clients.Add(new Client
                         {
                             Id = id,
-                            Title = title,
-                            Description = description,  
+                            Name = name,
+                            Email = email,
+                            Dateregistration = dateregistration,
+                            Age = age,
 
                         });
                     }
@@ -95,10 +106,10 @@ namespace Taro_kyrsovaя
                 }
             }
             connection.CloseConnection();
-            return specializations;
+            return clients;
         }
 
-        internal bool Update(specialization edit)
+        internal bool Update(Client edit)
         {
             bool result = false;
             if (connection == null)
@@ -106,9 +117,11 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Specialization` set `title`=@title, `description`=@description where `id` = {edit.Id}");
-                mc.Parameters.Add(new MySqlParameter("title", edit.Title));
-                mc.Parameters.Add(new MySqlParameter("description", edit.Description));
+                var mc = connection.CreateCommand($"update `Clients` set `name`=@name, `email`=@email, `dateregistration`=@dateregistration, `age`=@age where `id` = {edit.Id}");
+                mc.Parameters.Add(new MySqlParameter("name", edit.  Name));
+                mc.Parameters.Add(new MySqlParameter("email", edit.Email));
+                mc.Parameters.Add(new MySqlParameter("dateregistration", edit.Dateregistration));
+                mc.Parameters.Add(new MySqlParameter("age", edit.Age));
 
                 try
                 {
@@ -125,7 +138,7 @@ namespace Taro_kyrsovaя
         }
 
 
-        internal bool Remove(specialization remove)
+        internal bool Remove(Client remove)
         {
             bool result = false;
             if (connection == null)
@@ -133,7 +146,7 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"delete from `Specialization` where `id` = {remove.Id}");
+                var mc = connection.CreateCommand($"delete from `Clients` where `id` = {remove.Id}");
                 try
                 {
                     mc.ExecuteNonQuery();
@@ -148,11 +161,11 @@ namespace Taro_kyrsovaя
             return result;
         }
 
-        static specializationDB db;
-        public static specializationDB GetDb()
+        static ClientDB db;
+        public static ClientDB GetDb()
         {
             if (db == null)
-                db = new specializationDB(DBconnection.GetDbConnection());                  
+                db = new ClientDB(DBconnection.GetDbConnection());
             return db;
         }
     }
