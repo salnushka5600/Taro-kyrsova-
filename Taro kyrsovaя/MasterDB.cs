@@ -112,7 +112,7 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Master` set `name`=@name, `workexperience`=@workexperience, `surname`=@surname, where `id` = {edit.Id}");
+                var mc = connection.CreateCommand($"update `Master` set `name`=@name, `workexperience`=@workexperience, `surname`=@surname where `id` = {edit.Id}");
                 mc.Parameters.Add(new MySqlParameter("name", edit.Name));
                 mc.Parameters.Add(new MySqlParameter("workexperience", edit.Workexperience));
                 mc.Parameters.Add(new MySqlParameter("surname", edit.SurName));

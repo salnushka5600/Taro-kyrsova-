@@ -24,5 +24,11 @@ namespace Taro_kyrsovaя
             InitializeComponent();
            
         }
+        private void MasterEdit(object sender, RoutedEventArgs e)
+        {
+            var master = (sender as Button).CommandParameter as Master;
+            if (master != null) 
+                new Добавить_мастера(master).Show();
+        }
     }
 }

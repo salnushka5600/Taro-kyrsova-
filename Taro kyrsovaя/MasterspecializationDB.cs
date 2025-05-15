@@ -8,16 +8,16 @@ using System.Windows;
 
 namespace Taro_kyrsovaя
 {
-   internal class ServiceDB 
+    internal class MasterspecializationDB
     {
         DBconnection connection;
 
-        private ServiceDB(DBconnection db)
+        private MasterspecializationDB (DBconnection db)
         {
             this.connection = db;
         }
 
-        public bool Insert(Service service)
+        public bool Insert(Masterspecialization masterspecialization)
         {
             bool result = false;
             if (connection == null)
@@ -25,12 +25,12 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `Service` Values (0, @Title, @Description, @Price, @Sessionduration );select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `Master-Specialization` Values (0, @IDMaster, @IDSpecialization );select LAST_INSERT_ID();");
 
-                cmd.Parameters.Add(new MySqlParameter("Title", service.Title));
-                cmd.Parameters.Add(new MySqlParameter("Description", service.Description));
-                cmd.Parameters.Add(new MySqlParameter("Price", service.Price));
-                cmd.Parameters.Add(new MySqlParameter("Sessionduration", service.Sessionduration));
+                cmd.Parameters.Add(new MySqlParameter("IDMaster", masterspecialization.IdMaster));
+                cmd.Parameters.Add(new MySqlParameter("IDSpecialization", masterspecialization.Idspecialization));
+              
+
                 try
                 {
                     // выполняем запрос через ExecuteScalar, получаем id вставленной записи
@@ -39,7 +39,7 @@ namespace Taro_kyrsovaя
                     if (id > 0)
                     {
                         // назначаем полученный id обратно в объект для дальнейшей работы
-                        service.Id = id;
+                        masterspecialization.Id = id;
                         result = true;
                     }
                     else
@@ -56,15 +56,15 @@ namespace Taro_kyrsovaя
             return result;
         }
 
-        internal List<Service> SelectAll()
+        internal List<Masterspecialization> SelectByMaster(int master)
         {
-            List<Service> services = new List<Service>();
+            List<Masterspecialization> masterspecializations = new List<Masterspecialization>();
             if (connection == null)
-                return services;
+                return masterspecializations;
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select `id`, `title`, `description`, `price`, `sessionduration` from `Services` ");
+                var command = connection.CreateCommand("select `id`, `idmaster`, `IDSpecialization` from `Master-Specialization` where IDMaster = " + master);
                 try
                 {
 
@@ -73,28 +73,24 @@ namespace Taro_kyrsovaя
                     while (dr.Read())
                     {
                         int id = dr.GetInt32(0);
-                        string title = string.Empty;
+                        int idmaster = 0;
                         if (!dr.IsDBNull(1))
-                            title = dr.GetString("title");
-                        string description = string.Empty;
+                            idmaster = dr.GetInt32("idmaster");
+                        int idspecialization = 0;
                         if (!dr.IsDBNull(2))
-                            description = dr.GetString("description");
-                        int price = 0;
-                        if (!dr.IsDBNull(2))
-                            price = dr.GetInt32("price");
-                        int sessionduration = 0;
-                        if (!dr.IsDBNull(2))
-                            sessionduration = dr.GetInt32("sessionduration");
+                            idspecialization = dr.GetInt32("IDSpecialization");
+                      
 
 
 
-                        services.Add(new Service
+
+                        masterspecializations.Add(new Masterspecialization
                         {
                             Id = id,
-                            Title = title,
-                            Description = description,
-                            Price = price,
-                            Sessionduration = sessionduration,
+                            IdMaster = idmaster,
+                            Idspecialization = idspecialization,
+                           
+
 
                         });
                     }
@@ -105,10 +101,10 @@ namespace Taro_kyrsovaя
                 }
             }
             connection.CloseConnection();
-            return services;
+            return masterspecializations;
         }
 
-        internal bool Update(Service edit)
+        internal bool Update(Masterspecialization edit)
         {
             bool result = false;
             if (connection == null)
@@ -116,11 +112,11 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Service` set `title`=@title, `description`=@description, `price`=@price, `sessionduration`=@sessionduration where `id` = {edit.Id}");
-                mc.Parameters.Add(new MySqlParameter("title", edit.Title));
-                mc.Parameters.Add(new MySqlParameter("description", edit.Description));
-                mc.Parameters.Add(new MySqlParameter("price", edit.Price));
-                mc.Parameters.Add(new MySqlParameter("sessionduration", edit.Sessionduration));
+                var mc = connection.CreateCommand($"update `Master-Specialization` set `idmaster`=@idmaster, `IDSpecialization`=@idspecialization where `id` = {edit.Id}");
+                mc.Parameters.Add(new MySqlParameter("idmaster", edit.IdMaster));
+                mc.Parameters.Add(new MySqlParameter("idservice", edit.Idspecialization));
+                
+
 
                 try
                 {
@@ -137,7 +133,7 @@ namespace Taro_kyrsovaя
         }
 
 
-        internal bool Remove(Service remove)
+        internal bool RemoveByMaster(int master)
         {
             bool result = false;
             if (connection == null)
@@ -145,7 +141,7 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"delete from `Service` where `id` = {remove.Id}");
+                var mc = connection.CreateCommand($"delete from `Master-Specialization` where `IDMaster` = {master}");
                 try
                 {
                     mc.ExecuteNonQuery();
@@ -160,11 +156,11 @@ namespace Taro_kyrsovaя
             return result;
         }
 
-        static ServiceDB db;
-        public static ServiceDB GetDb()
+        static MasterspecializationDB db;
+        public static MasterspecializationDB GetDb()
         {
             if (db == null)
-                db = new ServiceDB(DBconnection.GetDbConnection());
+                db = new MasterspecializationDB(DBconnection.GetDbConnection());
             return db;
         }
     }

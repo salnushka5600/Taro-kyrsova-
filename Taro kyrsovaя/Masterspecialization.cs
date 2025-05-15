@@ -9,10 +9,11 @@ namespace Taro_kyrsovaя
    public class Masterspecialization
     {
         public int Id { get; set; }
-        public string IdMaster { get; set; }
-        public string Idspecialization { get; set; }
+        public int IdMaster { get; set; }
         public Master Master { get; set; }
+        public int Idspecialization { get; set; }
         public specialization specialization { get; set; }
+        
         
     }
 }

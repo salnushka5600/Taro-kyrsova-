@@ -22,13 +22,13 @@
 
         </Grid.RowDefinitions>
         <Label Content="Название" FontSize="22"  Grid.Row="0" />
-        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="0"  Background="#FFF4D2D7" Text="{Binding Workexperience, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding Newspecialization}"/>
+        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="0"  Background="#FFF4D2D7" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding NewService}"/>
         <Label Content="Описание" FontSize="22"  Grid.Row="1" />
-        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1" Background="#FFF4D2D7" Text="{Binding Workexperience, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding Newspecialization}" />
+        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1" Background="#FFF4D2D7" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding NewService}" />
         <Label Content="Стоимость" FontSize="22"  Grid.Row="2" />
-        <TextBox Text="{Binding Workexperience, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding Newspecialization}" Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="2"  Background="#FFF4D2D7"/>
+        <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding NewService}" Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="2"  Background="#FFF4D2D7"/>
         <Label Content="Длительность сессии" FontSize="22"  Grid.Row="3" />
-        <TextBox Text="{Binding Workexperience, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding Newspecialization}" Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="3"  Background="#FFF4D2D7"/>
-        <Button Content="Добавить" Height="30" Width="200" HorizontalAlignment="Left" Grid.Row="4"  Background="Pink" Command="{Binding Insertspecialization}"/>
+        <TextBox Text="{Binding Sessionduration, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding NewService}" Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="3"  Background="#FFF4D2D7"/>
+        <Button Content="Добавить" Height="30" Width="200" HorizontalAlignment="Left" Grid.Row="4"  Background="Pink" Command="{Binding Insertservice}"/>
     </Grid>
 </Window>

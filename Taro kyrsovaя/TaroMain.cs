@@ -7,6 +7,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Taro_kyrsovaя
 {
@@ -181,7 +182,7 @@ namespace Taro_kyrsovaя
         }
         private void SelectAll()
         {
-           
+            Clients = new ObservableCollection<Client>(ClientDB.GetDb().SelectAll());
             Masters = new ObservableCollection<Master>(MasterDB.GetDb().SelectAll());
             Specializations = new ObservableCollection<specialization>(specializationDB.GetDb().SelectAll());
         }

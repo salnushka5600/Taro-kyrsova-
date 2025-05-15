@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Taro_kyrsovaя"
+         xmlns:mvvm="clr-namespace:Taro_kyrsovaя"
+        DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
         Title="Просмотр_расписания_услуг" Height="450" Width="800">
+    <Window.Resources>
+        <mvvm:TaroMain x:Key="vm"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -19,10 +24,10 @@
         <ListView Grid.Row="1" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Дата" Width="200"/>
-                    <GridViewColumn Header="Услуга" Width="200"/>
-                    <GridViewColumn Header="Имя клиента" Width="200"/>
-                    <GridViewColumn Header="Имя мастера" Width="200"/>
+                    <GridViewColumn Header="Дата" Width="200" DisplayMemberBinding ="{Binding Date}"/>
+                    <GridViewColumn Header="Услуга" Width="200" DisplayMemberBinding ="{Binding Service}"/>
+                    <GridViewColumn Header="Имя клиента" Width="200" DisplayMemberBinding ="{Binding IDClient}"/>
+                    <GridViewColumn Header="Имя мастера" Width="200" DisplayMemberBinding ="{Binding IDMaster}"/>
                 </GridView>
             </ListView.View>
         </ListView>

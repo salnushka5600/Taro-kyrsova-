@@ -26,9 +26,15 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Имя" Width="150" DisplayMemberBinding ="{Binding Fullname}"/>
-                    <GridViewColumn Header="Специализация" Width="150"/>
+                    <GridViewColumn Header="Специализация" Width="150" DisplayMemberBinding ="{Binding specialization.Title}"/>
                     <GridViewColumn Header="Опыт работы" Width="150" DisplayMemberBinding ="{Binding Workexperience}"/>
-
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Edit" CommandParameter="{Binding}" Click="MasterEdit"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
 
                 </GridView>

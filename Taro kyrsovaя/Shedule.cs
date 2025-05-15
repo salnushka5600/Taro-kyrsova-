@@ -15,8 +15,8 @@ namespace Taro_kyrsovaя
         public Service Service { get; set; }
         public string IDMaster { get; set; }
         public Master Master { get; set; }
-        public string Date { get; set; }
-        public string Servicestatus { get; set; }
+        public DateTime Date { get; set; }
+        
 
     }
 }

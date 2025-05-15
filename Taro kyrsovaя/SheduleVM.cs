@@ -35,12 +35,8 @@ namespace Taro_kyrsovaя
 
 
             },
-                () =>
-                !string.IsNullOrEmpty(newshedule.IDClients) &&
-                !string.IsNullOrEmpty(newshedule.IDService) &&
-                !string.IsNullOrEmpty(newshedule.IDMaster) &&
-                !string.IsNullOrEmpty(newshedule.Date) &&
-                !string.IsNullOrEmpty(newshedule.Servicestatus));
+                () => true);
+               
 
 
 

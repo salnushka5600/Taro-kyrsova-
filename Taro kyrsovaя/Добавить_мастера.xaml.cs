@@ -22,9 +22,10 @@ namespace Taro_kyrsovaя
         public Добавить_мастера(Master selectedMaster)
         {
             InitializeComponent();
-            
+            ((addmasterVM)this.DataContext).SetListSpec(listSpec);
             ((addmasterVM)this.DataContext).SetClose(Close);
             ((addmasterVM)this.DataContext).SetMaster(selectedMaster);
+            
         }
     }
 }

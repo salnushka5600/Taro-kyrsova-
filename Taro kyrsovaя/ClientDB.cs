@@ -81,10 +81,10 @@ namespace Taro_kyrsovaя
                         if (!dr.IsDBNull(2))
                             email = dr.GetString("email");
                         string dateregistration = string.Empty;
-                        if (!dr.IsDBNull(2))
+                        if (!dr.IsDBNull(3))
                             dateregistration = dr.GetString("dateregistration");
                         int age = 0;
-                        if (!dr.IsDBNull(2))
+                        if (!dr.IsDBNull(4))
                             age = dr.GetInt32("age");
 
 

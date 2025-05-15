@@ -25,13 +25,13 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `Shedule` Values (0, @IDClients, @IDService, @IDMaster, @Date,  @Servicestatus );select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `Shedule` Values (0, @IDClients, @IDService, @IDMaster, @Date );select LAST_INSERT_ID();");
 
                 cmd.Parameters.Add(new MySqlParameter("IDClients", shedule.IDClients));
                 cmd.Parameters.Add(new MySqlParameter("IDService", shedule.IDService));
                 cmd.Parameters.Add(new MySqlParameter("IDMaster", shedule.IDMaster));
                 cmd.Parameters.Add(new MySqlParameter("Date", shedule.Date));
-                cmd.Parameters.Add(new MySqlParameter("Servicestatus", shedule.Servicestatus));
+                
                 try
                 {
                     // выполняем запрос через ExecuteScalar, получаем id вставленной записи
@@ -65,7 +65,7 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select `id`, `idclients`, `idservice`, `idmaster`, `date`, `servicestatus` from `Shedule` ");
+                var command = connection.CreateCommand("select `id`, `idclients`, `idservice`, `idmaster`, `date` from `Shedule` ");
                 try
                 {
 
@@ -83,12 +83,10 @@ namespace Taro_kyrsovaя
                         string idmaster = string.Empty;
                         if (!dr.IsDBNull(2))
                             idmaster = dr.GetString("idmaster");
-                        string date = string.Empty;
+                        DateTime date = new DateTime();
                         if (!dr.IsDBNull(2))
-                            date = dr.GetString("date");
-                        string servicestatus = string.Empty;
-                        if (!dr.IsDBNull(2))
-                            servicestatus = dr.GetString("servicestatus");
+                            date = dr.GetDateTime("date");
+                        
 
 
 
@@ -99,7 +97,7 @@ namespace Taro_kyrsovaя
                             IDService = idservice,
                             IDMaster = idmaster,
                             Date = date,
-                            Servicestatus = servicestatus,
+                           
 
                         
                         });
@@ -122,12 +120,12 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Shedule` set `idclients`=@idclients, `idservice`=@idservice, `idmaster`=@idmaster, `date`=@date, `servicestatus`=@servicestatus where `id` = {edit.Id}");
+                var mc = connection.CreateCommand($"update `Shedule` set `idclients`=@idclients, `idservice`=@idservice, `idmaster`=@idmaster, `date`=@date where `id` = {edit.Id}");
                 mc.Parameters.Add(new MySqlParameter("idclients", edit.IDClients));
                 mc.Parameters.Add(new MySqlParameter("idservice", edit.IDService));
                 mc.Parameters.Add(new MySqlParameter("idmaster", edit.IDMaster));
                 mc.Parameters.Add(new MySqlParameter("date", edit.Date));
-                mc.Parameters.Add(new MySqlParameter("servicestatus", edit.Servicestatus));
+                
 
                 try
                 {

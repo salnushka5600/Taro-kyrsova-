@@ -39,8 +39,8 @@ namespace Taro_kyrsovaя
                 () =>
                 !string.IsNullOrEmpty(newservice.Title) &&
                 !string.IsNullOrEmpty(newservice.Description) &&
-                !string.IsNullOrEmpty(newservice.Price) &&
-                !string.IsNullOrEmpty(newservice.Sessionduration));
+                NewService.Price >0 &&
+               NewService.Sessionduration >30);
 
 
 

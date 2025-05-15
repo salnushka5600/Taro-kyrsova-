@@ -24,7 +24,8 @@
         <ListView  Grid.Row="1" ItemsSource="{Binding Specializations}" SelectedItem="{Binding Selectedspecialization}">
             <ListView.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="Удалить команду" Command="{Binding Removespetialization}"/>
+                <MenuItem Header="Удалить " Command="{Binding Removespetialization}"/>
+                <MenuItem Header="Удалить специализацию" Command="{Binding Removespetialization}"/>
             </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>
