@@ -64,6 +64,31 @@ namespace Taro_kyrsovaя
 
 
 
+        private Masterspecialization selectedmasterspecialization;
+        private ObservableCollection<Masterspecialization> masterspecializations = new();
+
+
+        public ObservableCollection<Masterspecialization> Masterspecializations
+        {
+            get => masterspecializations;
+            set
+            {
+                masterspecializations = value;
+                Signal();
+            }
+        }
+        public Masterspecialization Selectedmasterspecialization
+        {
+            get => selectedmasterspecialization;
+            set
+            {
+                selectedmasterspecialization = value;
+                Signal();
+            }
+        }
+
+
+
         private Client selectedClient;
         private ObservableCollection<Client> clients = new();
 

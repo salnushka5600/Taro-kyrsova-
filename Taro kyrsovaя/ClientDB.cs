@@ -80,9 +80,9 @@ namespace Taro_kyrsovaя
                         string email = string.Empty;
                         if (!dr.IsDBNull(2))
                             email = dr.GetString("email");
-                        string dateregistration = string.Empty;
+                        DateTime dateregistration = new DateTime();
                         if (!dr.IsDBNull(3))
-                            dateregistration = dr.GetString("dateregistration");
+                            dateregistration = dr.GetDateTime("dateregistration");
                         int age = 0;
                         if (!dr.IsDBNull(4))
                             age = dr.GetInt32("age");

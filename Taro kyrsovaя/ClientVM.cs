@@ -38,7 +38,7 @@ namespace Taro_kyrsovaя
                 () =>
                 !string.IsNullOrEmpty(newclient.Name) &&
                 !string.IsNullOrEmpty(newclient.Email) &&
-                !string.IsNullOrEmpty(newclient.Dateregistration) &&
+               newclient.Dateregistration <= DateTime.Now &&
                 Newclient.Age >= 18);
 
 

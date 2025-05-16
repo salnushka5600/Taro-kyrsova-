@@ -22,13 +22,13 @@
 
         </Grid.RowDefinitions>
         <Label Content="Дата" FontSize="22"  Grid.Row="0" />
-        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="0"  Background="#FFF4D2D7" Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding NewShedule}"/>
+        <DatePicker  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="0"  Background="#FFF4D2D7" Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding NewShedule}"/>
         <Label Content="Услуга" FontSize="22"  Grid.Row="1" />
-        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1"  Background="#FFF4D2D7" Text="{Binding Service, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding NewShedule}"/>
+        <ComboBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1"  Background="#FFF4D2D7" Text="{Binding Service, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding NewShedule}"/>
         <Label Content="Имя мастера" FontSize="22"  Grid.Row="2" />
-        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="2" Background="#FFF4D2D7" Text="{Binding IDMaster, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding NewShedule}"/>
+        <ComboBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="2" Background="#FFF4D2D7" Text="{Binding IDMaster, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding NewShedule}"/>
         <Label Content="Имя клиента" FontSize="22"  Grid.Row="3" />
-        <TextBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="3"  Background="#FFF4D2D7" Text="{Binding IDClient, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding NewShedule}"/>
+        <ComboBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="3"  Background="#FFF4D2D7" Text="{Binding IDClient, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding NewShedule}"/>
         <Button Content="Добавить" Height="30" Width="200" HorizontalAlignment="Left" Grid.Row="4"  Background="Pink" Command="{Binding Insertshedule}"/>
     </Grid>
 </Window>

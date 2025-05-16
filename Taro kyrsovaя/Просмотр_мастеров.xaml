@@ -25,13 +25,13 @@
         <ListView Grid.Row="1" ItemsSource="{Binding Masters}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Имя" Width="150" DisplayMemberBinding ="{Binding Fullname}"/>
-                    <GridViewColumn Header="Специализация" Width="150" DisplayMemberBinding ="{Binding specialization.Title}"/>
-                    <GridViewColumn Header="Опыт работы" Width="150" DisplayMemberBinding ="{Binding Workexperience}"/>
+                    <GridViewColumn Header="Имя" Width="200" DisplayMemberBinding ="{Binding Fullname}"/>
+                    <GridViewColumn Header="Специализация" Width="250" DisplayMemberBinding ="{Binding specialization}"/>
+                    <GridViewColumn Header="Опыт работы" Width="200" DisplayMemberBinding ="{Binding Workexperience}"/>
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Edit" CommandParameter="{Binding}" Click="MasterEdit"/>
+                                <Button Content="🔧" CommandParameter="{Binding}" Click="MasterEdit" Background="Pink"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

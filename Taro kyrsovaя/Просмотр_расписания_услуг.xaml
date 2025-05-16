@@ -21,7 +21,7 @@
             <TextBox Width="300"/>
             <Button Content="Поиск" Width="50" Height="20" Background="Pink"/>
         </StackPanel>
-        <ListView Grid.Row="1" >
+        <ListView Grid.Row="1" ItemsSource="{Binding Shedule}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Дата" Width="200" DisplayMemberBinding ="{Binding Date}"/>
