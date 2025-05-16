@@ -15,13 +15,19 @@ using System.Windows.Shapes;
 namespace Taro_kyrsovaя
 {
     /// <summary>
-    /// Логика взаимодействия для Просмотр_Сессий.xaml
+    /// Логика взаимодействия для Просмотр_расписания_услуг.xaml
     /// </summary>
-    public partial class Просмотр_Сессий : Window
+    public partial class Просмотр_расписания_услуг : Window
     {
-        public Просмотр_Сессий()
+        public Просмотр_расписания_услуг()
         {
             InitializeComponent();
+        }
+        private void SheduleEdit(object sender, RoutedEventArgs e)
+        {
+            var shedule = (sender as Button).CommandParameter as Shedule;
+            if (shedule != null)
+                new Добавить_расписание_услуг(shedule).Show();
         }
     }
 }

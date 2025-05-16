@@ -15,13 +15,16 @@ using System.Windows.Shapes;
 namespace Taro_kyrsovaя
 {
     /// <summary>
-    /// Логика взаимодействия для Сессии.xaml
+    /// Логика взаимодействия для расписания_услуг.xaml
     /// </summary>
-    public partial class Добавить_Сессию : Window
+    public partial class Добавить_расписание_услуг : Window
     {
-        public Добавить_Сессию()
+        public Добавить_расписание_услуг(Shedule shedule)
         {
-           InitializeComponent();
+            InitializeComponent();
+            ((SheduleVM)this.DataContext).SetShedule(shedule);
+            ((SheduleVM)this.DataContext).SetClose(Close);
+
         }
     }
 }

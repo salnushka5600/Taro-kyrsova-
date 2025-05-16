@@ -36,9 +36,34 @@ namespace Taro_kyrsovaя
                 Signal();
             }
         }
-        
-        
-       
+
+
+
+        private Shedule selectedshedule;
+        private ObservableCollection<Shedule> shedules = new();
+
+
+        public ObservableCollection<Shedule> Shedules
+        {
+            get => shedules;
+            set
+            {
+                shedules = value;
+                Signal();
+            }
+        }
+        public Shedule Selectedshedule 
+        {
+            get => selectedshedule;
+            set
+            {
+                selectedshedule = value;
+                Signal();
+            }
+        }
+
+
+
         private specialization selectedspecialization;
         private ObservableCollection<specialization> specializations = new();
 
@@ -176,7 +201,7 @@ namespace Taro_kyrsovaя
 
             ADDSession = new CommandMvvm(() =>
             {
-                new Добавить_Сессию().ShowDialog();
+                new Добавить_расписание_услуг(new Shedule ()).ShowDialog();
 
             }, () => true);
 
@@ -188,7 +213,7 @@ namespace Taro_kyrsovaя
 
             ScanSession = new CommandMvvm(() =>
             {
-                new Просмотр_Сессий().ShowDialog();
+                new Просмотр_расписания_услуг().ShowDialog();
 
             }, () => true);
 

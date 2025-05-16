@@ -1,4 +1,4 @@
-﻿<Window x:Class="Taro_kyrsovaя.Просмотр_Сессий"
+﻿<Window x:Class="Taro_kyrsovaя.Просмотр_расписания_услуг"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,7 +19,8 @@
         <StackPanel Orientation="Horizontal">
 
             <TextBox Width="300"/>
-            <Button Content="Поиск" Width="50" Height="20" Background="Pink"/>
+            <Button Content="Поиск" Width="50" Height="20" Background="Pink" CommandParameter="{Binding}" 
+            Click="SheduleEdit"/>
         </StackPanel>
         <ListView Grid.Row="1" ItemsSource="{Binding Shedule}">
             <ListView.View>

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MySqlX.XDevAPI;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +22,38 @@ namespace Taro_kyrsovaя
 
             }
         }
+
+
+       
+
+
+
+        private Service selectedservice;
+        private ObservableCollection<Service> services = new();
+
+
+        public ObservableCollection<Service> Services
+        {
+            get => services;
+            set
+            {
+                services = value;
+                Signal();
+            }
+        }
+        public Service SelectedService
+        {
+            get => selectedservice;
+            set
+            {
+                selectedservice = value;
+                Signal();
+            }
+        }
+
+
+
+       
 
         public CommandMvvm Insertservice { get; set; }
         public ServiceVM()
@@ -52,6 +86,7 @@ namespace Taro_kyrsovaя
         {
             NewService = selectedservice;
         }
+        
 
         Action close;
         internal void SetClose(Action close)
