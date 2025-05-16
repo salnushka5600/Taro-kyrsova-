@@ -19,6 +19,7 @@ namespace Taro_kyrsovaя
     /// </summary>
     public partial class Добавить_мастера : Window
     {
+        private addmasterVM vm;
         public Добавить_мастера(Master selectedMaster)
         {
             InitializeComponent();
@@ -26,6 +27,16 @@ namespace Taro_kyrsovaя
             ((addmasterVM)this.DataContext).SetClose(Close);
             ((addmasterVM)this.DataContext).SetMaster(selectedMaster);
             
+            vm = (addmasterVM)this.Resources["vm"];
+
+            // Передача ListBox в VM
+            vm.SetListSpec(this.listSpec);
+
+            // Передача метода закрытия окна
+            vm.SetClose(() => this.Close());
+
+            DataContext = vm;
+
         }
     }
 }

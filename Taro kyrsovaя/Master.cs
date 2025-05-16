@@ -12,6 +12,7 @@ namespace Taro_kyrsovaя
         public string Name { get; set; }
         public int Workexperience { get; set; }
         public string SurName { get; set; }
+        public string Specializations { get; set; }
         public string Fullname => SurName + " " + Name;
 
 

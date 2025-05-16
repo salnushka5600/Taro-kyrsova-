@@ -83,7 +83,9 @@ namespace Taro_kyrsovaя
                         string surname = string.Empty;
                         if (!dr.IsDBNull(3))
                             surname = dr.GetString("surname");
-                       
+
+
+                        
 
                         master.Add(new Master
                         {
