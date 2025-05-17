@@ -265,6 +265,9 @@ namespace Taro_kyrsovaя
             Specializations = new ObservableCollection<specialization>(specializationDB.GetDb().SelectAll());
             Services = new ObservableCollection<Service>(ServiceDB.GetDb().SelectAll());
             Shedules = new ObservableCollection<Shedule>(SheduleDB.GetDb().SelectAll());
+
+
+           
         }
     }
 }

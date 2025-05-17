@@ -22,12 +22,12 @@
             <TextBox Width="300"/>
             <Button Content="Поиск" Width="50" Height="20" Background="Pink"/>
         </StackPanel>
-        <ListView Grid.Row="1" ItemsSource="{Binding Masters}">
+        <ListView Grid.Row="1" ItemsSource="{Binding Masterspecializations}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Имя" Width="200" DisplayMemberBinding ="{Binding Fullname}"/>
-                    <GridViewColumn Header="Специализация" Width="250" DisplayMemberBinding ="{Binding Specializations}"/>
-                    <GridViewColumn Header="Опыт работы" Width="200" DisplayMemberBinding ="{Binding Workexperience}"/>
+                    <GridViewColumn Header="Имя" Width="200" DisplayMemberBinding ="{Binding Master.Fullname}"/>
+                    <GridViewColumn Header="Специализация" Width="200" DisplayMemberBinding ="{Binding specializations.Title}"/>
+                    <GridViewColumn Header="Опыт работы" Width="200" DisplayMemberBinding ="{Binding Master.Workexperience}"/>
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
