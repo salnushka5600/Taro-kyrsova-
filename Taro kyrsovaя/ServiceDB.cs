@@ -64,7 +64,7 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select `id`, `title`, `description`, `price`, `sessionduration` from `Services` ");
+                var command = connection.CreateCommand("select `id`, `title`, `description`, `price`, `sessionduration` from `Service` ");
                 try
                 {
 

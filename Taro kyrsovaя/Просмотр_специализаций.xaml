@@ -24,14 +24,13 @@
         <ListView  Grid.Row="1" ItemsSource="{Binding Specializations}" SelectedItem="{Binding Selectedspecialization}">
             <ListView.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="Удалить " Command="{Binding Removespetialization}"/>
                 <MenuItem Header="Удалить специализацию" Command="{Binding Removespetialization}"/>
             </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Название" Width="200" DisplayMemberBinding ="{Binding Title}"/>
-                    <GridViewColumn Header="Описание" Width="200" DisplayMemberBinding ="{Binding Description}"/>
+                    <GridViewColumn Header="Описание" Width="280" DisplayMemberBinding ="{Binding Description}"/>
 
                 </GridView>
             </ListView.View>

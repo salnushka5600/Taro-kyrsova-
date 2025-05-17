@@ -65,7 +65,7 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select `id`, `idclients`, `idservice`, `idmaster`, `date` from `Shedule` ");
+                var command = connection.CreateCommand("SELECT sh.ID, sh.IDMaster, sh.IDService, sh.IDClients, sh.Date,  m.Name, m.Workexperience, m.SurName, s.Title, s.Description, s.Price, s.Sessionduration, c.Name, c.Email, c.Dateregistration, c.Age\r\nFROM `Shedule` sh\r\nJOIN Master m ON sh.IDMaster = m.ID \r\nJOIN Service s ON sh.IDService = s.ID \r\nJOIN Clients c ON sh.IDClients = c.ID  ");
                 try
                 {
 
@@ -74,21 +74,81 @@ namespace Taro_kyrsovaя
                     while (dr.Read())
                     {
                         int id = dr.GetInt32(0);
-                        string idclients = string.Empty;
-                        if (!dr.IsDBNull(1))
-                            idclients = dr.GetString("idclients");
-                        string idservice = string.Empty;
-                        if (!dr.IsDBNull(2))
-                            idservice = dr.GetString("idservice");
-                        string idmaster = string.Empty;
-                        if (!dr.IsDBNull(2))
-                            idmaster = dr.GetString("idmaster");
+                        int idmaster = dr.GetInt32(1);
+                        int idservice = dr.GetInt32(2);
+                        int idclients = dr.GetInt32(3); 
+
                         DateTime date = new DateTime();
-                        if (!dr.IsDBNull(2))
+                        if (!dr.IsDBNull(4))
                             date = dr.GetDateTime("date");
+                        string name = string.Empty;
+                        if (!dr.IsDBNull(5))
+                            name = dr.GetString(5);
+                        int workexperience = 0;
+                        if (!dr.IsDBNull(6))
+                            workexperience = dr.GetInt32("workexperience");
+                        string surname = string.Empty;
+                        if (!dr.IsDBNull(7))
+                            surname = dr.GetString("surname");
+                        string title = string.Empty;
+                        if (!dr.IsDBNull(8))
+                            title = dr.GetString("title");
+                        string description = string.Empty;
+                        if (!dr.IsDBNull(9))
+                            description = dr.GetString("description");
+                        int price = 0;
+                        if (!dr.IsDBNull(10))
+                            price = dr.GetInt32("price");
+                        int sessionduration = 0;
+                        if (!dr.IsDBNull(11))
+                            sessionduration = dr.GetInt32("sessionduration");
+                        string nameclient = string.Empty;
+                        if (!dr.IsDBNull(12))
+                            nameclient = dr.GetString(12);
+                        string email = string.Empty;
+                        if (!dr.IsDBNull(13))
+                            email = dr.GetString("email");
+                        DateTime dateregistration = new DateTime();
+                        if (!dr.IsDBNull(14))
+                            dateregistration = dr.GetDateTime("dateregistration");
+                        int age = 0;
+                        if (!dr.IsDBNull(15))
+                            age = dr.GetInt32("age");
+
+
+
+                        
                         
 
 
+                        Client client = new Client
+                        {
+                            Id = idclients,
+                            Name = nameclient,
+                            Age = age,
+                            Dateregistration = dateregistration,
+                            Email = email,
+                        };
+
+
+
+                        Master master = new Master
+                        {
+                            Id = idmaster,
+                            Name = name,
+                            Workexperience = workexperience,
+                            SurName = surname,
+                           
+                        };
+
+
+                        Service service = new Service
+                        {
+                            Id = idservice,
+                            Title = title,
+                            Description = description,
+                           
+                        };
 
                         shedules.Add(new Shedule
                         {
@@ -97,6 +157,10 @@ namespace Taro_kyrsovaя
                             IDService = idservice,
                             IDMaster = idmaster,
                             Date = date,
+                            Service = service,
+                            Master = master,
+                            Client = client,
+                            
                            
 
                         

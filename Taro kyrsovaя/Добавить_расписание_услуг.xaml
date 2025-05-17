@@ -24,11 +24,11 @@
         <Label Content="Дата" FontSize="22"  Grid.Row="0" />
         <DatePicker  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="0"  Background="#FFF4D2D7" SelectedDate="{Binding NewShedule.Date, UpdateSourceTrigger=PropertyChanged}" />
         <Label Content="Услуга" FontSize="22"  Grid.Row="1" />
-        <ComboBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1"  Background="#FFF4D2D7" SelectedItem="{Binding NewShedule.Service}" ItemsSource="{Binding Services}" DisplayMemberPath="Title"/>
+        <ComboBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1"  Background="#FFF4D2D7" SelectedItem="{Binding SelectedService}" ItemsSource="{Binding Services}" DisplayMemberPath="Description"/>
         <Label Content="Имя мастера" FontSize="22"  Grid.Row="2" />
-        <ComboBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="2" Background="#FFF4D2D7" SelectedItem="{Binding NewShedule.Master}" ItemsSource="{Binding Masters}" DisplayMemberPath="Name"/>
+        <ComboBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="2" Background="#FFF4D2D7" SelectedItem="{Binding SelectedMaster}" ItemsSource="{Binding Masters}" DisplayMemberPath="Name"/>
         <Label Content="Имя клиента" FontSize="22"  Grid.Row="3" />
-        <ComboBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="3"  Background="#FFF4D2D7" SelectedItem="{Binding NewShedule.Client}" ItemsSource="{Binding Clients}" DisplayMemberPath="Name"/>
-        <Button Content="Добавить" Height="30" Width="200" HorizontalAlignment="Left" Grid.Row="4"  Background="Pink" Command="{Binding Insertshedule78}"/>
+        <ComboBox  Height="30" Width="250" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="3"  Background="#FFF4D2D7" SelectedItem="{Binding SelectedClient}" ItemsSource="{Binding Clients}" DisplayMemberPath="Name"/>
+        <Button Content="Добавить" Height="30" Width="200" HorizontalAlignment="Left" Grid.Row="4"  Background="Pink" Command="{Binding Insertshedule}"/>
     </Grid>
 </Window>

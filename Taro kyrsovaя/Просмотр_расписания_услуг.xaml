@@ -22,13 +22,13 @@
             <Button Content="Поиск" Width="50" Height="20" Background="Pink" CommandParameter="{Binding}" 
             Click="SheduleEdit"/>
         </StackPanel>
-        <ListView Grid.Row="1" ItemsSource="{Binding Shedule}">
+        <ListView Grid.Row="1" ItemsSource="{Binding  Shedules}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Дата" Width="200" DisplayMemberBinding ="{Binding Date}"/>
-                    <GridViewColumn Header="Услуга" Width="200" DisplayMemberBinding ="{Binding Service}"/>
-                    <GridViewColumn Header="Имя клиента" Width="200" DisplayMemberBinding ="{Binding IDClient}"/>
-                    <GridViewColumn Header="Имя мастера" Width="200" DisplayMemberBinding ="{Binding IDMaster}"/>
+                    <GridViewColumn Header="Услуга" Width="200" DisplayMemberBinding ="{Binding Service.Description}"/>
+                    <GridViewColumn Header="Имя клиента" Width="200" DisplayMemberBinding ="{Binding Client.Name}"/>
+                    <GridViewColumn Header="Имя мастера" Width="200" DisplayMemberBinding ="{Binding Master.Fullname}"/>
                 </GridView>
             </ListView.View>
         </ListView>

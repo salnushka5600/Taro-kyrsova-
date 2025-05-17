@@ -127,9 +127,11 @@ namespace Taro_kyrsovaя
             Insertshedule = new CommandMvvm(() =>
             {
 
-                
-                
-                    SheduleDB.GetDb().Insert(NewShedule);
+                NewShedule.IDClients = SelectedClient.Id;
+                NewShedule.IDMaster = SelectedMaster.Id;
+                NewShedule.IDService = SelectedService.Id;
+
+                SheduleDB.GetDb().Insert(NewShedule);
                     close?.Invoke();
                 
 
@@ -148,6 +150,7 @@ namespace Taro_kyrsovaя
         public void SetShedule(Shedule selectedshedule)
         {
             NewShedule = selectedshedule;
+            SelectAll();
         }
         private void SelectAll()
         {

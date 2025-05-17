@@ -114,6 +114,34 @@ namespace Taro_kyrsovaя
 
 
 
+
+
+
+        private Service selectedservice;
+        private ObservableCollection<Service> services = new();
+
+
+        public ObservableCollection<Service> Services
+        {
+            get => services;
+            set
+            {
+                services = value;
+                Signal();
+            }
+        }
+        public Service SelectedService
+        {
+            get => selectedservice;
+            set
+            {
+                selectedservice = value;
+                Signal();
+            }
+        }
+
+
+
         private Client selectedClient;
         private ObservableCollection<Client> clients = new();
 
@@ -235,6 +263,8 @@ namespace Taro_kyrsovaя
             Clients = new ObservableCollection<Client>(ClientDB.GetDb().SelectAll());
             Masters = new ObservableCollection<Master>(MasterDB.GetDb().SelectAll());
             Specializations = new ObservableCollection<specialization>(specializationDB.GetDb().SelectAll());
+            Services = new ObservableCollection<Service>(ServiceDB.GetDb().SelectAll());
+            Shedules = new ObservableCollection<Shedule>(SheduleDB.GetDb().SelectAll());
         }
     }
 }
