@@ -23,5 +23,12 @@ namespace Taro_kyrsovaя
         {
             InitializeComponent();
         }
+
+        private void ServiceEdit(object sender, RoutedEventArgs e)
+        {
+            var service = (sender as Button).CommandParameter as Service;
+            if (service != null)
+                new Добавить_услугу(service).Show();
+        }
     }
 }

@@ -31,6 +31,11 @@ namespace Taro_kyrsovaя
                     ClientDB.GetDb().Insert(Newclient);
                     close?.Invoke();
                 }
+                else
+                {
+                    ClientDB.GetDb().Update(Newclient);
+                    close?.Invoke();
+                }
 
 
 

@@ -13,6 +13,7 @@ namespace Taro_kyrsovaя
         public string Description { get; set; }
         public int Price { get; set; }
         public int Sessionduration { get; set; }
+        public List<Shedule> Shedules { get; set; } = new();
 
     }
 }

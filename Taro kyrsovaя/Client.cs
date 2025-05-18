@@ -13,7 +13,7 @@ namespace Taro_kyrsovaя
         public string Email { get; set; }
         public DateTime Dateregistration { get; set; }
         public int Age { get; set; }
-       
+        public List<Shedule> Shedules { get; set; } = new();
 
     }
 }

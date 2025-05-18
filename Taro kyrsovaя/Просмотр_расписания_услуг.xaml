@@ -18,17 +18,33 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
 
-            <TextBox Width="300"/>
+            <TextBox Width="300" Text="{Binding Searchs, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="Поиск" Width="50" Height="20" Background="Pink" CommandParameter="{Binding}" 
             Click="SheduleEdit"/>
         </StackPanel>
         <ListView Grid.Row="1" ItemsSource="{Binding  Shedules}">
+
+
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Удалить расписание услуги" Command="{Binding RemovesShedule}"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
+                    <GridViewColumn Header="Мастера" Width="150" DisplayMemberBinding ="{Binding Master.Fullname}"/>
+                    <GridViewColumn Header="Клиенты" Width="200" DisplayMemberBinding ="{Binding Client.Name}"/>
+                    <GridViewColumn Header="Услуги" Width="Auto" DisplayMemberBinding ="{Binding Service.Description}"/>
                     <GridViewColumn Header="Дата" Width="200" DisplayMemberBinding ="{Binding Date}"/>
-                    <GridViewColumn Header="Услуга" Width="200" DisplayMemberBinding ="{Binding Service.Description}"/>
-                    <GridViewColumn Header="Имя клиента" Width="200" DisplayMemberBinding ="{Binding Client.Name}"/>
-                    <GridViewColumn Header="Имя мастера" Width="200" DisplayMemberBinding ="{Binding Master.Fullname}"/>
+
+
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="🔧" CommandParameter="{Binding}" Click="SheduleEdit" Background="Pink"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

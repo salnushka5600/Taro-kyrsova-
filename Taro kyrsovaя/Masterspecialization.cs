@@ -12,7 +12,7 @@ namespace Taro_kyrsovaя
         public int IdMaster { get; set; }
         public Master Master { get; set; }
         public int Idspecialization { get; set; }
-        public specialization specialization { get; set; }
+        public specialization Specialization { get; set; }
         
         
     }

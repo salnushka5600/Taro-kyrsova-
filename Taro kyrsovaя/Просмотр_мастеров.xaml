@@ -19,15 +19,25 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
 
-            <TextBox Width="300"/>
+            <TextBox Width="300" Text="{Binding Searchs, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="Поиск" Width="50" Height="20" Background="Pink"/>
         </StackPanel>
-        <ListView Grid.Row="1" ItemsSource="{Binding Masterspecializations}">
+        <ListView Grid.Row="1" ItemsSource="{Binding Masters}">
+
+
+
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Удалить мастера" Command="{Binding RemovesMaster}"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            
+            
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Имя" Width="200" DisplayMemberBinding ="{Binding Master.Fullname}"/>
-                    <GridViewColumn Header="Специализация" Width="200" DisplayMemberBinding ="{Binding specializations.Title}"/>
-                    <GridViewColumn Header="Опыт работы" Width="200" DisplayMemberBinding ="{Binding Master.Workexperience}"/>
+                    <GridViewColumn Header="Имя" Width="200" DisplayMemberBinding ="{Binding Fullname}"/>
+                    <GridViewColumn Header="Специализация" Width="200" DisplayMemberBinding ="{Binding Specializations.Title}"/>
+                    <GridViewColumn Header="Опыт работы" Width="200" DisplayMemberBinding ="{Binding Workexperience}"/>
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

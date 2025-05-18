@@ -66,6 +66,11 @@ namespace Taro_kyrsovaя
                     ServiceDB.GetDb().Insert(NewService);
                     close?.Invoke();
                 }
+                else
+                {
+                    ServiceDB.GetDb().Update(NewService);
+                    close?.Invoke();
+                }
 
 
 

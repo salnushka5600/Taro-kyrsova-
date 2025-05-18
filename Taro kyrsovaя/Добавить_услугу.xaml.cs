@@ -19,10 +19,11 @@ namespace Taro_kyrsovaя
     /// </summary>
     public partial class Добавить_услугу : Window
     {
-        public Добавить_услугу()
+        public Добавить_услугу(Service selectedservice)
         {
             InitializeComponent();
             ((ServiceVM)this.DataContext).SetClose(Close);
+            ((ServiceVM)this.DataContext).Setservice(selectedservice);
         }
     }
 }

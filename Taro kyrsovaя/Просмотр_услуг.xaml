@@ -18,16 +18,34 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
 
-            <TextBox Width="300"/>
+            <TextBox Width="300" Text="{Binding Searchs, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="Поиск" Width="50" Height="20" Background="Pink"/>
         </StackPanel>
         <ListView Grid.Row="1" ItemsSource="{Binding Services}" >
+
+
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Удалить услугу" Command="{Binding RemovesService}"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            
+            
             <ListView.View>
                 <GridView>
                     
-                    <GridViewColumn Header="Название" Width="230" DisplayMemberBinding ="{Binding Title}"/>
+                    <GridViewColumn Header="Название" Width="Auto" DisplayMemberBinding ="{Binding Description}"/>
                     <GridViewColumn Header="Стоимость" Width="230" DisplayMemberBinding ="{Binding Price}"/>
                     <GridViewColumn Header="Длительность" Width="230" DisplayMemberBinding ="{Binding Sessionduration}"/>
+
+
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="🔧" CommandParameter="{Binding}" Click="ServiceEdit" Background="Pink"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

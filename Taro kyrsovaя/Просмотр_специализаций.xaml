@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
 
-            <TextBox Width="300"/>
+            <TextBox Width="300" Text="{Binding Searchs, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="Поиск" Width="50" Height="20" Background="Pink"/>
         </StackPanel>
         <ListView  Grid.Row="1" ItemsSource="{Binding Specializations}" SelectedItem="{Binding Selectedspecialization}">
@@ -30,7 +30,16 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Название" Width="200" DisplayMemberBinding ="{Binding Title}"/>
-                    <GridViewColumn Header="Описание" Width="280" DisplayMemberBinding ="{Binding Description}"/>
+                    <GridViewColumn Header="Описание" Width="Auto" DisplayMemberBinding ="{Binding Description}"/>
+
+
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="🔧" CommandParameter="{Binding}" Click="SpecializationEdit" Background="Pink"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
                 </GridView>
             </ListView.View>

@@ -130,10 +130,20 @@ namespace Taro_kyrsovaя
                 NewShedule.IDClients = SelectedClient.Id;
                 NewShedule.IDMaster = SelectedMaster.Id;
                 NewShedule.IDService = SelectedService.Id;
+                if (NewShedule.Id == 0)
+                {
+                    SheduleDB.GetDb().Insert(NewShedule);
+                    
+                }
+                else
+                {
+                    SheduleDB.GetDb().Update(NewShedule);
+                    
+                }
 
-                SheduleDB.GetDb().Insert(NewShedule);
-                    close?.Invoke();
-                
+               SelectAll();
+                close?.Invoke();
+
 
 
 
@@ -148,15 +158,25 @@ namespace Taro_kyrsovaя
         }
 
         public void SetShedule(Shedule selectedshedule)
-        {
-            NewShedule = selectedshedule;
-            SelectAll();
-        }
+{
+    // Загружаем все списки, если еще не загружены
+   
+        SelectAll();
+
+    // Устанавливаем текущий объект
+    NewShedule = selectedshedule;
+
+    // Находим соответствующие элементы по Id и устанавливаем их как выбранные
+    SelectedService = Services.FirstOrDefault(s => s.Id == selectedshedule.IDService);
+    SelectedMaster = Masters.FirstOrDefault(m => m.Id == selectedshedule.IDMaster);
+    SelectedClient = Clients.FirstOrDefault(c => c.Id == selectedshedule.IDClients);
+}
         private void SelectAll()
         {
             Masters = new ObservableCollection<Master>(MasterDB.GetDb().SelectAll());
             Clients = new ObservableCollection<Client>(ClientDB.GetDb().SelectAll());
             Services = new ObservableCollection<Service>(ServiceDB.GetDb().SelectAll());
+            Shedules = new ObservableCollection<Shedule>(SheduleDB.GetDb().SelectAll());
 
         }
 

@@ -23,5 +23,12 @@ namespace Taro_kyrsovaя
         {
             InitializeComponent();
         }
+
+        private void ClientEdit(object sender, RoutedEventArgs e)
+        {
+            var client = (sender as Button).CommandParameter as Client;
+            if (client != null)
+                new ДобавитьКлиента(client).Show();
+        }
     }
 }

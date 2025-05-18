@@ -23,5 +23,13 @@ namespace Taro_kyrsovaя
         {
             InitializeComponent();
         }
+
+
+        private void SpecializationEdit(object sender, RoutedEventArgs e)
+        {
+            var specialization = (sender as Button).CommandParameter as specialization;
+            if (specialization != null)
+                new Добавить_специализацию(specialization).Show();
+        }
     }
 }

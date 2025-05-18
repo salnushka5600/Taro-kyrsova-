@@ -8,12 +8,36 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Taro_kyrsovaя
 {
 
     internal class TaroMain : BaseVM
     {
+        private string searchs;
+
+        public string Searchs
+        {
+
+            get => searchs;
+            set
+            {
+                searchs = value;
+                Search(searchs);
+                SearchSpecialization(searchs);
+                SearchMasters(searchs);
+                SearchServices(searchs);
+                SearchShedules(searchs);
+            }
+        }
+
+
+
+
+
+
+
         private Master selectedmaster;
         private ObservableCollection<Master> masters = new();
 
@@ -175,6 +199,10 @@ namespace Taro_kyrsovaя
         public CommandMvvm ScanService { get; set; }
         public CommandMvvm ScanSession { get; set; }
         public CommandMvvm Removespetialization { get; set; }
+        public CommandMvvm RemovesClient { get; set; }
+        public CommandMvvm RemovesMaster { get; set; }
+        public CommandMvvm RemovesService { get; set; }
+        public CommandMvvm RemovesShedule { get; set; }
 
 
 
@@ -223,7 +251,7 @@ namespace Taro_kyrsovaя
 
             ADDService = new CommandMvvm(() =>
             {
-                new Добавить_услугу().ShowDialog();
+                new Добавить_услугу(new Service()).ShowDialog();
 
             }, () => true);
 
@@ -242,19 +270,78 @@ namespace Taro_kyrsovaя
             ScanSession = new CommandMvvm(() =>
             {
                 new Просмотр_расписания_услуг().ShowDialog();
+                SelectAll();
 
             }, () => true);
 
             Removespetialization = new CommandMvvm(() =>
             {
 
-                var teamvozvrta = MessageBox.Show("Вы уверены что хотите удалить специализацию ?", "Подтверждение", MessageBoxButton.YesNo);
+                var speci = MessageBox.Show("Вы уверены что хотите удалить специализацию ?", "Подтверждение", MessageBoxButton.YesNo);
 
-                if (teamvozvrta == MessageBoxResult.Yes)
+                if (speci == MessageBoxResult.Yes)
                 {
                     specializationDB.GetDb().Remove(Selectedspecialization);
                 }
                 SelectAll();
+            }, () => true);
+
+
+
+
+
+            RemovesClient = new CommandMvvm(() =>
+            {
+
+                var clien = MessageBox.Show("Вы уверены что хотите удалить клиента ?", "Подтверждение", MessageBoxButton.YesNo);
+
+                if (clien == MessageBoxResult.Yes)
+                {
+                    ClientDB.GetDb().Remove(SelectedClient);
+                }
+                SelectAll();
+            
+            }, () => true);
+
+
+
+            RemovesMaster = new CommandMvvm(() =>
+            {
+
+                var mast = MessageBox.Show("Вы уверены что хотите удалить мастера ?", "Подтверждение", MessageBoxButton.YesNo);
+
+                if (mast == MessageBoxResult.Yes)
+                {
+                    MasterDB.GetDb().Remove(SelectedMaster);
+                }
+                SelectAll();
+
+            }, () => true);
+
+            RemovesService = new CommandMvvm(() =>
+            {
+
+                var servi = MessageBox.Show("Вы уверены что хотите удалить услугу ?", "Подтверждение", MessageBoxButton.YesNo);
+
+                if (servi == MessageBoxResult.Yes)
+                {
+                    ServiceDB.GetDb().Remove(SelectedService);
+                }
+                SelectAll();
+
+            }, () => true);
+
+            RemovesShedule = new CommandMvvm(() =>
+            {
+
+                var shedu = MessageBox.Show("Вы уверены что хотите удалить расписание услуги ?", "Подтверждение", MessageBoxButton.YesNo);
+
+                if (shedu == MessageBoxResult.Yes)
+                {
+                    SheduleDB.GetDb().Remove(Selectedshedule);
+                }
+                SelectAll();
+
             }, () => true);
 
         }
@@ -268,6 +355,35 @@ namespace Taro_kyrsovaя
 
 
            
+        }
+        private void Search(string search)
+        {
+
+            Clients = new ObservableCollection<Client>(Serch.GetTable().Search(search));
+        }
+
+        private void SearchSpecialization(string search)
+        {
+
+            Specializations = new ObservableCollection<specialization>(Searchspecialization.GetTable().SearchSpecialization(search));
+        }
+
+        private void SearchMasters(string search)
+        {
+
+            Masters = new ObservableCollection<Master>(SearchMaster.GetTable().SearchMasters(search));
+        }
+
+        private void SearchServices(string search)
+        {
+
+            Services = new ObservableCollection<Service>(SearchService.GetTable().SearchServices(search));
+        }
+
+        private void SearchShedules(string search)
+        {
+
+            Shedules = new ObservableCollection<Shedule>(SearchShedule.GetTable().SearchShedules(search));
         }
     }
 }

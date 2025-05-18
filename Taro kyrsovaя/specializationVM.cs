@@ -31,6 +31,11 @@ namespace Taro_kyrsovaя
                     specializationDB.GetDb().Insert(Newspecialization);
                     close?.Invoke();
                 }
+                else
+                {
+                    specializationDB.GetDb().Update(Newspecialization);
+                    close?.Invoke();
+                }
                
 
 

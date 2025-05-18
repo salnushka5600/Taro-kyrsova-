@@ -14,6 +14,7 @@ namespace Taro_kyrsovaя
         public string SurName { get; set; }
         public string Fullname => SurName + " " + Name;
 
+        public List<Shedule> Shedules { get; set; } = new();
 
 
 
