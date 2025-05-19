@@ -342,13 +342,13 @@ namespace Taro_kyrsovaя
                 }
                 SelectAll();
 
-            }, () => true);
+            }, () => Selectedshedule != null);
 
         }
         private void SelectAll()
         {
             Clients = new ObservableCollection<Client>(ClientDB.GetDb().SelectAll());
-            Masters = new ObservableCollection<Master>(MasterDB.GetDb().SelectAll());
+            Masters = new ObservableCollection<Master>(MasterDB.GetDb().SelectAllWithSpec());
             Specializations = new ObservableCollection<specialization>(specializationDB.GetDb().SelectAll());
             Services = new ObservableCollection<Service>(ServiceDB.GetDb().SelectAll());
             Shedules = new ObservableCollection<Shedule>(SheduleDB.GetDb().SelectAll());
@@ -380,7 +380,7 @@ namespace Taro_kyrsovaя
             Services = new ObservableCollection<Service>(SearchService.GetTable().SearchServices(search));
         }
 
-        private void SearchShedules(string search)
+        public void SearchShedules(string search)
         {
 
             Shedules = new ObservableCollection<Shedule>(SearchShedule.GetTable().SearchShedules(search));

@@ -106,6 +106,60 @@ namespace Taro_kyrsovaя
             return master;
         }
 
+        internal List<Master> SelectAllWithSpec()
+        {
+            List<Master> master = new List<Master>();
+            if (connection == null)
+                return master;
+
+            if (connection.OpenConnection())
+            {
+                var command = connection.CreateCommand("SELECT m.`id`,  m.`name`,  m.`workexperience`,  m.`surname`, s.Title from `Master-Specialization` ms RIGHT JOIN Specialization s ON ms.IDSpecialization = s.ID RIGHT JOIN Master m ON ms.IDMaster = m.ID ORDER BY m.ID");
+                try
+                {
+
+                    MySqlDataReader dr = (MySqlDataReader)command.ExecuteReader();
+                    Master last = new();
+                    while (dr.Read())
+                    {
+                        int id = dr.GetInt32(0);
+                        if (id != last.Id)
+                        {
+                            string name = string.Empty;
+                            if (!dr.IsDBNull(1))
+                                name = dr.GetString("name");
+                            int workexperience = 0;
+                            if (!dr.IsDBNull(2))
+                                workexperience = dr.GetInt32("workexperience");
+                            string surname = string.Empty;
+                            if (!dr.IsDBNull(3))
+                                surname = dr.GetString("surname");
+
+
+                            last = new Master
+                            {
+                                Id = id,
+                                Name = name,
+                                Workexperience = workexperience,
+                                SurName = surname,
+
+                            };
+                            last.Specializations.Add(new specialization { Title = dr.GetString("Title") });
+                            master.Add(last);
+                        }
+                        else
+                            last.Specializations.Add(new specialization { Title = dr.GetString("Title") });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            connection.CloseConnection();
+            return master;
+        }
+
         internal bool Update(Master edit)
         {
             bool result = false;

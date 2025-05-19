@@ -18,7 +18,7 @@ namespace Taro_kyrsovaя
             MySqlConnectionStringBuilder sb = new MySqlConnectionStringBuilder();
             sb.UserID = "student";
             sb.Password = "student";
-            sb.Server = "95.154.107.102"; //"192.168.200.13"; "95.154.107.102"; 
+            sb.Server =  "192.168.200.13"; //"95.154.107.102";  
             sb.Database = "Taro";
             sb.CharacterSet = "utf8mb4";
 

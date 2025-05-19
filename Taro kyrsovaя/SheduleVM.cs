@@ -141,7 +141,9 @@ namespace Taro_kyrsovaя
                     
                 }
 
-               SelectAll();
+               
+                SelectAll();
+                
                 close?.Invoke();
 
 
@@ -157,20 +159,15 @@ namespace Taro_kyrsovaя
 
         }
 
+       
         public void SetShedule(Shedule selectedshedule)
-{
-    // Загружаем все списки, если еще не загружены
-   
-        SelectAll();
-
-    // Устанавливаем текущий объект
-    NewShedule = selectedshedule;
-
-    // Находим соответствующие элементы по Id и устанавливаем их как выбранные
-    SelectedService = Services.FirstOrDefault(s => s.Id == selectedshedule.IDService);
-    SelectedMaster = Masters.FirstOrDefault(m => m.Id == selectedshedule.IDMaster);
-    SelectedClient = Clients.FirstOrDefault(c => c.Id == selectedshedule.IDClients);
-}
+        {
+            SelectAll();
+            NewShedule = selectedshedule;
+            SelectedService = Services.FirstOrDefault(s => s.Id == selectedshedule.IDService);
+            SelectedMaster = Masters.FirstOrDefault(m => m.Id == selectedshedule.IDMaster);
+            SelectedClient = Clients.FirstOrDefault(c => c.Id == selectedshedule.IDClients);
+        }
         private void SelectAll()
         {
             Masters = new ObservableCollection<Master>(MasterDB.GetDb().SelectAll());

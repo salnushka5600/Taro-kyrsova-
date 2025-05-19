@@ -16,7 +16,7 @@ namespace Taro_kyrsovaя
 
         public List<Shedule> Shedules { get; set; } = new();
 
-
+        public List<specialization> Specializations { get; set; } = new();
 
     }
 }

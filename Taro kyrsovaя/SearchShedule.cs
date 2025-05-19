@@ -61,8 +61,6 @@ namespace Taro_kyrsovaя
                             // указание книге автора
                             shedule.Master = master;
 
-                            // добавление книги в результат запроса
-                            result.Add(shedule);
 
 
                             var client = clients.FirstOrDefault(s => s.Id == shedule.IDClients);
@@ -84,8 +82,6 @@ namespace Taro_kyrsovaя
                             // указание книге автора
                             shedule.Client = client;
 
-                            // добавление книги в результат запроса
-                            result.Add(shedule);
 
 
                             var service = services.FirstOrDefault(s => s.Id == shedule.IDService);

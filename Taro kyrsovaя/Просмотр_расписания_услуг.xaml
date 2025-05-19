@@ -22,7 +22,7 @@
             <Button Content="Поиск" Width="50" Height="20" Background="Pink" CommandParameter="{Binding}" 
             Click="SheduleEdit"/>
         </StackPanel>
-        <ListView Grid.Row="1" ItemsSource="{Binding  Shedules}">
+        <ListView Grid.Row="1" ItemsSource="{Binding  Shedules}" SelectedItem="{ Binding Selectedshedule}">
 
 
             <ListView.ContextMenu>
@@ -35,7 +35,7 @@
                     <GridViewColumn Header="Мастера" Width="150" DisplayMemberBinding ="{Binding Master.Fullname}"/>
                     <GridViewColumn Header="Клиенты" Width="200" DisplayMemberBinding ="{Binding Client.Name}"/>
                     <GridViewColumn Header="Услуги" Width="Auto" DisplayMemberBinding ="{Binding Service.Description}"/>
-                    <GridViewColumn Header="Дата" Width="200" DisplayMemberBinding ="{Binding Date}"/>
+                    <GridViewColumn Header="Дата" Width="Auto" DisplayMemberBinding ="{Binding Date}"/>
 
 
                     <GridViewColumn>

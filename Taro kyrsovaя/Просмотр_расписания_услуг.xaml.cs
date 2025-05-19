@@ -27,7 +27,12 @@ namespace Taro_kyrsovaя
         {
             var shedule = (sender as Button).CommandParameter as Shedule;
             if (shedule != null)
-                new Добавить_расписание_услуг(shedule).Show();
+            {
+                new Добавить_расписание_услуг(shedule).ShowDialog();
+                var vm = DataContext as TaroMain;
+                vm.SearchShedules(vm.Searchs); 
+            }
+            
         }
     }
 }

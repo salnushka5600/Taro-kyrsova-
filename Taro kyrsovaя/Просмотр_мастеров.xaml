@@ -36,7 +36,13 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Имя" Width="200" DisplayMemberBinding ="{Binding Fullname}"/>
-                    <GridViewColumn Header="Специализация" Width="200" DisplayMemberBinding ="{Binding Specializations.Title}"/>
+                    <GridViewColumn Header="Специализация" Width="200">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Specializations}" DisplayMemberPath="Title"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Опыт работы" Width="200" DisplayMemberBinding ="{Binding Workexperience}"/>
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>

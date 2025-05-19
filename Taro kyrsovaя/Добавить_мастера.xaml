@@ -10,7 +10,9 @@
         Title="Добавить_мастера" Height="550" Width="1000">
     <Window.Resources>
         <mvvm:addmasterVM x:Key="vm"/>
-        </Window.Resources>
+        
+  
+    </Window.Resources>
         <Grid>
         <Grid.RowDefinitions>
 
@@ -43,7 +45,9 @@
         </StackPanel>
         <StackPanel Grid.RowSpan="5" Grid.Column="1" >
             <Label Content="Специализация" FontSize="22"  Grid.Row="2"  Grid.Column="1" Margin="0,20,0,0"/>
-            <ListBox SelectionMode="Multiple" DisplayMemberPath="Title"  x:Name="listSpec" Height="80" Width="170" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="2" Grid.Column="1" Background="#FFF4D2D7" ItemsSource="{Binding Specializations}"/>
+            <ListBox ItemContainerStyle="{DynamicResource ListBoxItemCustomBrush}" SelectionMode="Multiple" DisplayMemberPath="Title"  x:Name="listSpec" Height="80" Width="170" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="2" Grid.Column="1" Background="#FFF4D2D7" ItemsSource="{Binding Specializations}"/>
+
+
 
         </StackPanel>
             
