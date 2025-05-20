@@ -21,6 +21,7 @@ namespace Taro_kyrsovaя
                 Signal();
             }
         }
+        //удаление
         private Master selectedMaster;
 
         public Master SelectedMaster

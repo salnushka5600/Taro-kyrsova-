@@ -159,7 +159,7 @@ namespace Taro_kyrsovaя
             connection.CloseConnection();
             return master;
         }
-
+        //редактирование
         internal bool Update(Master edit)
         {
             bool result = false;

@@ -137,7 +137,7 @@ namespace Taro_kyrsovaя
             return result;
         }
 
-
+        //удаление
         internal bool Remove(Client remove)
         {
             bool result = false;
@@ -162,6 +162,7 @@ namespace Taro_kyrsovaя
         }
 
         static ClientDB db;
+        
         public static ClientDB GetDb()
         {
             if (db == null)

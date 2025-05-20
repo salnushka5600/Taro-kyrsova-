@@ -19,7 +19,7 @@ namespace Taro_kyrsovaя
                 Signal();
             }
         }
-
+        
         private Client selectedClient;
 
         public Client SelectedClient
@@ -63,12 +63,12 @@ namespace Taro_kyrsovaя
 
 
         }
-
+        //часть редактирования
         public void Setclient(Client selectedClient)
         {
             Newclient = selectedClient;
         }
-
+        //метод для закрытия окна
         Action close;
         internal void SetClose(Action close)
         {
