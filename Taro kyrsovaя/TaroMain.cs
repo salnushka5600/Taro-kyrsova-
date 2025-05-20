@@ -316,7 +316,7 @@ namespace Taro_kyrsovaя
                 }
                 SelectAll();
 
-            }, () => true);
+            }, () => SelectedMaster != null);
 
             RemovesService = new CommandMvvm(() =>
             {
@@ -345,6 +345,7 @@ namespace Taro_kyrsovaя
             }, () => Selectedshedule != null);
 
         }
+        //обновление
         private void SelectAll()
         {
             Clients = new ObservableCollection<Client>(ClientDB.GetDb().SelectAll());
@@ -356,6 +357,7 @@ namespace Taro_kyrsovaя
 
            
         }
+        //поисковики
         private void Search(string search)
         {
 

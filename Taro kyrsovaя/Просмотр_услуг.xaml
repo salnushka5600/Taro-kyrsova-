@@ -21,7 +21,7 @@
             <TextBox Width="300" Text="{Binding Searchs, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="Поиск" Width="50" Height="20" Background="Pink"/>
         </StackPanel>
-        <ListView Grid.Row="1" ItemsSource="{Binding Services}" >
+        <ListView Grid.Row="1" ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService }">
 
 
             <ListView.ContextMenu>
@@ -33,10 +33,10 @@
             
             <ListView.View>
                 <GridView>
-                    
-                    <GridViewColumn Header="Название" Width="Auto" DisplayMemberBinding ="{Binding Description}"/>
-                    <GridViewColumn Header="Стоимость" Width="230" DisplayMemberBinding ="{Binding Price}"/>
-                    <GridViewColumn Header="Длительность" Width="230" DisplayMemberBinding ="{Binding Sessionduration}"/>
+                    <GridViewColumn Header="Название" Width="Auto" DisplayMemberBinding ="{Binding Title}"/>
+                    <GridViewColumn Header="Описание" Width="Auto" DisplayMemberBinding ="{Binding Description}"/>
+                    <GridViewColumn Header="Стоимость" Width="150" DisplayMemberBinding ="{Binding Price}"/>
+                    <GridViewColumn Header="Длительность" Width="150" DisplayMemberBinding ="{Binding Sessionduration}"/>
 
 
                     <GridViewColumn>

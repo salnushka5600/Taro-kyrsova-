@@ -9,6 +9,8 @@ namespace Taro_kyrsovaя
     internal class specializationVM : BaseVM
     {
         private specialization newspecialization = new();
+        private specialization selectedspecialization;
+
 
         public specialization Newspecialization
         {
@@ -19,6 +21,9 @@ namespace Taro_kyrsovaя
                 Signal();
             }
         }
+
+
+        
 
         public CommandMvvm Insertspecialization { get; set; }
         public specializationVM()

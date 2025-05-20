@@ -20,6 +20,18 @@ namespace Taro_kyrsovaя
             }
         }
 
+        private Client selectedClient;
+
+        public Client SelectedClient
+        {
+            get => selectedClient;
+            set
+            {
+                selectedClient = value;
+                Signal(); // или OnPropertyChanged(nameof(SelectedClient));
+            }
+        }
+
         public CommandMvvm Insertclient { get; set; }
         public ClientVM()
         {

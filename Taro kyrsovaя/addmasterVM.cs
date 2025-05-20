@@ -21,6 +21,17 @@ namespace Taro_kyrsovaя
                 Signal();
             }
         }
+        private Master selectedMaster;
+
+        public Master SelectedMaster
+        {
+            get => selectedMaster;
+            set
+            {
+                selectedMaster = value;
+                Signal(); // или OnPropertyChanged(nameof(SelectedMaster));
+            }
+        }
 
         public List<specialization> Specializations { get; set; }
 

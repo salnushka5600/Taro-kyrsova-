@@ -196,18 +196,30 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"delete from `Master` where `id` = {remove.Id}");
                 try
                 {
-                    mc.ExecuteNonQuery();
+                    // Удаляем связанные записи из Master-Specialization
+                    var deleteSpecializations = connection.CreateCommand(
+                        $"DELETE FROM `Master-Specialization` WHERE `IDMaster` = {remove.Id}");
+                    deleteSpecializations.ExecuteNonQuery();
+
+                    // Удаляем самого Master
+                    var deleteMaster = connection.CreateCommand(
+                        $"DELETE FROM `Master` WHERE `ID` = {remove.Id}");
+                    deleteMaster.ExecuteNonQuery();
+
                     result = true;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
+                finally
+                {
+                    connection.CloseConnection();
+                }
             }
-            connection.CloseConnection();
+
             return result;
         }
 

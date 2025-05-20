@@ -22,7 +22,7 @@
             <TextBox Width="300" Text="{Binding Searchs, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="Поиск" Width="50" Height="20" Background="Pink"/>
         </StackPanel>
-        <ListView Grid.Row="1" ItemsSource="{Binding Masters}">
+        <ListView Grid.Row="1" ItemsSource="{Binding Masters}" SelectedItem="{Binding SelectedMaster}">
 
 
 
