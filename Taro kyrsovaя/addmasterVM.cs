@@ -44,6 +44,15 @@ namespace Taro_kyrsovaя
             {
                 bool insert = NewMaster.Id == 0;
 
+                // Проверка обязательности специализации
+                if (listSpec == null || listSpec.SelectedItems.Count == 0)
+                {
+                    // Можно вывести сообщение пользователю или просто прервать выполнение
+                    // Например:
+                    System.Windows.MessageBox.Show("Пожалуйста, добавьте специализацию для мастера.", "Обязательное поле", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                    return;
+                }
+
                 if (insert)
                     MasterDB.GetDb().Insert(NewMaster);
                 else
@@ -63,6 +72,7 @@ namespace Taro_kyrsovaя
 
                 !string.IsNullOrEmpty(newMaster.Name) &&
                 !string.IsNullOrEmpty(newMaster.SurName));
+                
 
 
         }
