@@ -11,7 +11,9 @@ namespace Taro_kyrsovaя
 {
 
     internal class MasterDB
+    
     {
+
         DBconnection connection;
 
         private MasterDB(DBconnection db)
@@ -27,19 +29,16 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `Master` Values (0, @Name, @Workexperience, @SurName );select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into Master Values (0, @Name, @Workexperience, @SurName );select LAST_INSERT_ID();");
 
                 cmd.Parameters.Add(new MySqlParameter("Name", master.Name));
                 cmd.Parameters.Add(new MySqlParameter("Workexperience", master.Workexperience));
                 cmd.Parameters.Add(new MySqlParameter("SurName", master.SurName));
                 try
                 {
-                    // выполняем запрос через ExecuteScalar, получаем id вставленной записи
-                    // если нам не нужен id, то в запросе убираем часть select LAST_INSERT_ID(); и выполняем команду через ExecuteNonQuery
                     int id = (int)(ulong)cmd.ExecuteScalar();
                     if (id > 0)
                     {
-                        // назначаем полученный id обратно в объект для дальнейшей работы
                         master.Id = id;
                         result = true;
                     }
@@ -65,12 +64,11 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select `id`, `name`, `workexperience`, `surname` from `Master` ");
+                var command = connection.CreateCommand("select id, name, workexperience, surname from Master ");
                 try
                 {
-                   
                     MySqlDataReader dr = (MySqlDataReader)command.ExecuteReader();
-                  
+
                     while (dr.Read())
                     {
                         int id = dr.GetInt32(0);
@@ -84,16 +82,12 @@ namespace Taro_kyrsovaя
                         if (!dr.IsDBNull(3))
                             surname = dr.GetString("surname");
 
-
-                        
-
                         master.Add(new Master
                         {
                             Id = id,
                             Name = name,
                             Workexperience = workexperience,
                             SurName = surname,
-                           
                         });
                     }
                 }
@@ -111,13 +105,11 @@ namespace Taro_kyrsovaя
             List<Master> master = new List<Master>();
             if (connection == null)
                 return master;
-
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("SELECT m.`id`,  m.`name`,  m.`workexperience`,  m.`surname`, s.Title from `Master-Specialization` ms RIGHT JOIN Specialization s ON ms.IDSpecialization = s.ID RIGHT JOIN Master m ON ms.IDMaster = m.ID ORDER BY m.ID");
+                var command = connection.CreateCommand("SELECT m.id,  m.name,  m.workexperience,  m.surname, s.Title from `Master-Specialization` ms RIGHT JOIN Specialization s ON ms.IDSpecialization = s.ID RIGHT JOIN Master m ON ms.IDMaster = m.ID ORDER BY m.ID");
                 try
                 {
-
                     MySqlDataReader dr = (MySqlDataReader)command.ExecuteReader();
                     Master last = new();
                     while (dr.Read())
@@ -135,14 +127,12 @@ namespace Taro_kyrsovaя
                             if (!dr.IsDBNull(3))
                                 surname = dr.GetString("surname");
 
-
                             last = new Master
                             {
                                 Id = id,
                                 Name = name,
                                 Workexperience = workexperience,
                                 SurName = surname,
-
                             };
                             last.Specializations.Add(new specialization { Title = dr.GetString("Title") });
                             master.Add(last);
@@ -159,7 +149,7 @@ namespace Taro_kyrsovaя
             connection.CloseConnection();
             return master;
         }
-        //редактирование
+
         internal bool Update(Master edit)
         {
             bool result = false;
@@ -168,7 +158,7 @@ namespace Taro_kyrsovaя
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Master` set `name`=@name, `workexperience`=@workexperience, `surname`=@surname where `id` = {edit.Id}");
+                var mc = connection.CreateCommand($"update Master set name=@name, workexperience=@workexperience, surname=@surname where id = {edit.Id}");
                 mc.Parameters.Add(new MySqlParameter("name", edit.Name));
                 mc.Parameters.Add(new MySqlParameter("workexperience", edit.Workexperience));
                 mc.Parameters.Add(new MySqlParameter("surname", edit.SurName));
@@ -187,7 +177,6 @@ namespace Taro_kyrsovaя
             return result;
         }
 
-
         internal bool Remove(Master remove)
         {
             bool result = false;
@@ -198,16 +187,17 @@ namespace Taro_kyrsovaя
             {
                 try
                 {
+                    // Удаляем связанные записи из Shedule
+                    var deleteSchedules = connection.CreateCommand($"DELETE FROM Shedule WHERE IDMaster = {remove.Id}");
+                    deleteSchedules.ExecuteNonQuery();
+
                     // Удаляем связанные записи из Master-Specialization
-                    var deleteSpecializations = connection.CreateCommand(
-                        $"DELETE FROM `Master-Specialization` WHERE `IDMaster` = {remove.Id}");
+                    var deleteSpecializations = connection.CreateCommand($"DELETE FROM `Master-Specialization` WHERE IDMaster = {remove.Id}");
                     deleteSpecializations.ExecuteNonQuery();
 
                     // Удаляем самого Master
-                    var deleteMaster = connection.CreateCommand(
-                        $"DELETE FROM `Master` WHERE `ID` = {remove.Id}");
+                    var deleteMaster = connection.CreateCommand($"DELETE FROM Master WHERE ID = {remove.Id}");
                     deleteMaster.ExecuteNonQuery();
-
                     result = true;
                 }
                 catch (Exception ex)
@@ -232,3 +222,6 @@ namespace Taro_kyrsovaя
         }
     }
 }
+
+
+
