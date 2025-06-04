@@ -35,7 +35,7 @@
             
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Имя" Width="200" DisplayMemberBinding ="{Binding Fullname}"/>
+                    <GridViewColumn Header="ФИО" Width="200" DisplayMemberBinding ="{Binding Fullname}"/>
                     <GridViewColumn Header="Специализация" Width="200">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
